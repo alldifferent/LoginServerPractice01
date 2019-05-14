@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.loginserverpractice01.databinding.ActivityLoginBinding;
 import com.example.loginserverpractice01.utils.ConnectServer;
+import com.example.loginserverpractice01.utils.ContextUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,8 @@ public class LoginActivity extends BaseActivity {
                 String inputId = act.idEdt.getText().toString();
                 String inputPw = act.passwordEdt.getText().toString();
 
+                ContextUtil.setUserInputId(mContext, inputId);
+
                 ConnectServer.postRequestLogin(mContext, inputId, inputPw, new ConnectServer.JsonResponseHandler() {
                     @Override
                     public void onResponse(JSONObject json) {
@@ -49,7 +52,11 @@ public class LoginActivity extends BaseActivity {
                                     code = json.getInt("code");
                                     if (code == 200){
 
-                                        Toast.makeText(mContext, "로그인 성공했습니다.", Toast.LENGTH_SHORT).show();
+
+
+                                        if (act.autoLoginCheckBox.isChecked()){
+
+                                        }
 
                                     }else {
                                         String message = json.getString("message");
@@ -78,6 +85,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+
+        String savedUserId = ContextUtil.getUserInputId(mContext);
+        act.idEdt.setText(savedUserId);
 
     }
 
