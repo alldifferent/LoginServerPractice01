@@ -8,6 +8,7 @@ public class ContextUtil {
     private static final String prefName= "UserLoginPref";
 
     private static final String USER_INPUT_ID = "USER_INPUT_ID";
+    private static final String USER_TOKEN = "USER_TOKEN";
 
     public static void setUserInputId(Context context, String userInputId){
 
@@ -20,6 +21,20 @@ public class ContextUtil {
 
         SharedPreferences pref = context.getSharedPreferences(prefName, context.MODE_PRIVATE);
         return pref.getString(USER_INPUT_ID, "");
+
+    }
+
+    public static void setUserToken(Context context, String userToken){
+
+        SharedPreferences pref = context.getSharedPreferences(prefName, context.MODE_PRIVATE);
+        pref.edit().putString(USER_TOKEN, userToken);
+
+    }
+
+    public static String getUserToken(Context context){
+
+        SharedPreferences pref = context.getSharedPreferences(prefName, context.MODE_PRIVATE);
+        return pref.getString(USER_TOKEN, "");
 
     }
 
