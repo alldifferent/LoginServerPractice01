@@ -105,6 +105,43 @@ public class ConnectServer {
 
     }
 
+    public static void getResponesInfoBank(Context context, final JsonResponseHandler handler){
+
+        OkHttpClient client = new OkHttpClient();
+
+        HttpUrl.Builder httpUrl = HttpUrl.parse(BASE_URL + "/info/bank").newBuilder();
+        String requestUrl = httpUrl.build().toString();
+
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String responseContent = response.body().string();
+                Log.d("서버 응답 정보", responseContent);
+
+                try {
+                    JSONObject json = new JSONObject(responseContent);
+                    if (handler != null){
+                        handler.onResponse(json);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
 
 
 }

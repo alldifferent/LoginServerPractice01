@@ -125,9 +125,35 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </android.support.v4.view.ViewPager>
+
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/firstFrg"
+            class="com.example.loginserverpractice01.fragments.FragmentOne"
+            />
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/twoFrg"
+            class="com.example.loginserverpractice01.fragments.FragmentTwo"
+            />
 
 
     </LinearLayout>
+
 
 </layout>
